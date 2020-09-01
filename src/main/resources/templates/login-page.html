@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments :: head_fragment"></head>
+	<head>
+		<title>User Login</title>
+	</head>
+	<body>
+		<div class="container-fluid pt-5" >
+		
+			<div class="row justify-content-center">
+				<h3>Please sign in</h3>
+			</div> 
+		
+			<hr>
+			<div class="row justify-content-center" th:if="${userRegistered}">
+				<div class="alert alert-success alert-dismissible fade show">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>User registered! </strong>
+					<label th:text="${userRegistered}"></label>
+				</div>
+			</div>
+			<div class="row justify-content-center" th:if="${param.logout}" >
+				<div class="alert alert-info alert-dismissible fade show">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Logged out!</strong> You have been logged out
+				</div>
+			</div>
+			
+			<div class="row justify-content-center" th:if="${param.error}" >
+				<div class="alert alert-danger alert-dismissible fade show">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Error!</strong> Invalid username or password
+				</div>
+			</div>
+		
+			<div class="row justify-content-center">
+				<form action="#" th:action="@{/user-login}" method="post">
+					
+					<div class="from-group">
+						<label for="username">Username</label>
+						<input type="text" placeholder="Enter username" class="form-control mb-2" name="username" 
+							autofocus="autofocus" id="username" >
+					</div>
+					
+					<div class="from-group">
+						<label for="password">Password</label>
+						<input type="password" placeholder="Enter password" class="form-control mb-3" name="password"
+							id="password">
+					</div>
+					
+					<div class="form-inline">
+					
+						<input type="submit" class="btn btn-primary mr-2" value="Sign in" >
+						<a href="#" th:href="@{/registration}" class="btn btn-primary">Registration</a>
+					
+					</div>
+					
+				</form>	
+			</div>
+			
+		</div>
+	</body>
+</html>

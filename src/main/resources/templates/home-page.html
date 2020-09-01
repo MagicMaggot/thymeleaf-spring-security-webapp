@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="fragments :: head_fragment"></head>
+	<head>
+		<title>Home page</title>
+	</head>
+	
+	
+	<body>
+	
+		<div class="container pt-5">
+		
+			<h3 th:if="${#authentication.getPrincipal().getUser().getFirstName()}">Welcome, 
+				<strong th:text="|${#authentication.getPrincipal().getUser().getFirstName()} ${#authentication.getPrincipal().getUser().getLastName()}|">User</strong></h3>
+			
+			<hr>
+			
+			<div>
+				Logged user: <label sec:authentication="name"></label>
+			</div>
+			<div>
+				User roles: <label sec:authentication="principal.authorities"></label>
+			</div>
+			
+			<hr>
+			
+			<div>
+				<a th:href="@{/customers/list}" class="btn btn-primary mb-3">Customers list</a>
+			</div>
+			
+			<div>
+				<a sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')" th:href="@{/employees/list}" 
+					class="btn btn-primary mb-3">Employees list</a>		
+			</div>
+			
+			<div>
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/registration}" 
+					class="btn btn-primary mb-3">Register new user</a>		
+			</div>
+			
+			<div>
+			<form action="#" th:action="@{/logout}" method="post">
+				<button type="submit" class="btn btn-outline-primary">Logout</button>
+			</form>
+			</div>
+		</div>
+	
+	</body>
+	
+</html>

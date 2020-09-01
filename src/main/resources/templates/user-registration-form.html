@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments :: head_fragment"></head>
+	<head>
+		<title>Register new user</title>
+	</head>
+		
+	<body>
+	
+		<div class="container pt-3">
+		
+			<h2>Register new user</h2>
+			<hr>
+			Fields marked with (*) are required.
+			<form action="#" th:action="@{/registerUser}" method="post" th:object="${userRegistrationForm}" class="mt-3">
+				
+				<input type="hidden" th:field="*{selectedRole}"> 
+				
+				<div class="alert alert-danger" th:if="${registrationError}">
+					<strong>Registration error! </strong> <span th:text="${registrationError}">Some error</span>
+				</div>
+				
+				<div th:if="${#fields.hasGlobalErrors()}" th:each="err : ${#fields.errors('global')}" 
+					th:text="${err}" class="alert alert-danger">
+				</div>
+			
+				<div class="form-group col-3">
+					<label>Username</label>
+					<input type="text" placeholder="Enter username (*)" class="form-control" th:field="*{username}">
+					<span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+				</div>
+				
+				<div class="form-group col-3">
+					<label>Password</label>
+					<input type="password" placeholder="Enter password (*)" class="form-control" th:field="*{password}">
+					<span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+				</div>
+				
+				<div class="form-group col-3">
+					<label>Confirm password</label>
+					<input type="password" placeholder="Confirm password (*)" class="form-control" th:field="*{matchingPassword}">
+					<span class="error" th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}"></span>
+				</div>
+				
+				<div class="form-group col-3">
+					<label>First Name</label>
+					<input type="text" placeholder="Enter first name (*)" class="form-control" th:field="*{firstName}">
+					<span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+				</div>
+				
+				<div class="form-group col-3">
+					<label>Last Name</label>
+					<input type="text" placeholder="Enter last name" class="form-control" th:field="*{lastName}">
+					<span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+				</div>
+				
+				<div class="form-group col-3">
+					<label>Email address</label>
+					<input type="text" placeholder="Enter email address (*)" class="form-control" th:field="*{email}">
+					<span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+				</div>
+				
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+				
+					<div class="form-check-inline" th:each="role : ${roles}">
+						<label class="form-check-label mb-3">
+							<input type="radio" class="form-check-input" th:text="${role.friendlyName}" th:value="${role.id}" 
+								th:field="*{selectedRole}">
+						</label>
+					</div>
+				
+				</div>
+				<div class="row">
+					<input type="submit" value="Submit" class="btn btn-primary mr-2">
+					<a href="#" th:href="@{/}" class="btn btn-primary">Home</a>
+				</div>								
+			</form>
+			
+		</div>
+		
+	</body>
+	
+	
+</html>
+
