@@ -29,6 +29,9 @@ public class CustomersDBConfig {
 	@Autowired
 	private Environment env;
 	
+	@Autowired
+	private HibernateProperties hibernateProperties;
+	
 	@Bean
 	@ConfigurationProperties(prefix = "customers.datasource")
 	@Primary
@@ -44,12 +47,6 @@ public class CustomersDBConfig {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = entityManagerFactoryBuilder.dataSource(dataSource).build();
 		
 		entityManagerFactory.setPackagesToScan(env.getProperty("customers.jpa.packagesToScan"));
-		
-		Properties hibernateProperties = new Properties();
-		
-		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-		//hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		
 		entityManagerFactory.setJpaProperties(hibernateProperties);
 		

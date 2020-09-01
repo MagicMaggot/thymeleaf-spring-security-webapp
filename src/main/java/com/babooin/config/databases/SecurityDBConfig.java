@@ -29,6 +29,9 @@ public class SecurityDBConfig {
 	@Autowired
 	private Environment env;
 	
+	@Autowired
+	private HibernateProperties hibernateProperties;
+	
 	@Bean
 	@ConfigurationProperties(prefix = "sec.datasource")
 	public DataSource secDataSource() {
@@ -44,11 +47,13 @@ public class SecurityDBConfig {
 		String showSql = "hibernate.show_sql";
 		String hbm2ddl = "hibernate.hbm2ddl.auto";
 		
+		
+		
 		properties.put(showSql, env.getProperty(showSql));
 		properties.put(hbm2ddl, env.getProperty(hbm2ddl));
 		
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = 
-				builder.dataSource(dataSource).packages(env.getProperty("sec.jpa.packagesToScan")).properties(properties).build();
+				builder.dataSource(dataSource).packages(env.getProperty("sec.jpa.packagesToScan")).properties(hibernateProperties.getMap()).build();
 		
 		return entityManagerFactory;
 	}

@@ -27,6 +27,9 @@ public class EmployeesDBConfig {
 	@Autowired
 	private Environment env;
 	
+	@Autowired
+	private HibernateProperties hibernateProperties;
+	
 	@Bean
 	@ConfigurationProperties(prefix = "employees.datasource")
 	public DataSource employeesDataSource() {
@@ -38,11 +41,6 @@ public class EmployeesDBConfig {
 		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 		
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		Properties hibernateProperties = new Properties();
-		
-		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-		//hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		
 		entityManagerFactory.setDataSource(employeesDataSource());
 		entityManagerFactory.setPackagesToScan(env.getProperty("employees.jpa.packagesToScan"));		
