@@ -1,2 +1,11 @@
 # thymeleaf-spring-security-webapp
- Thymeleaf, Spring security, Spring MVC, Spring Data JPA, login, registration, multiple data sources
+ - Thymeleaf
+ - Spring Security 
+ - Spring MVC 
+ - Spring Data JPA 
+ - login 
+ - registration 
+ - form validation 
+ - multiple configurable data sources
+ - CRUD operations
+ - Bootstrap
