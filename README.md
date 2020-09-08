@@ -5,7 +5,7 @@
  - Spring Data JPA 
  - login 
  - registration 
- - form validation 
+ - form validation (Hibernate Validator)
  - multiple configurable data sources
  - CRUD operations
  - Bootstrap
