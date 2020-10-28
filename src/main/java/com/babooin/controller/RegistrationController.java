@@ -62,7 +62,7 @@ public class RegistrationController {
 		
 		
 		User newUser = new User(userRegistrationForm);
-		 
+		newUser.getRoles().add(roleDAO.getOne(userRegistrationForm.getSelectedRole()));
 		userService.save(newUser);
 		m.addAttribute("userRegistered", "You can now login with a new user");
 		

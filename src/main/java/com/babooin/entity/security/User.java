@@ -1,7 +1,6 @@
 package com.babooin.entity.security;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,12 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import com.babooin.entity.security.Role.USER_ROLE;
 import com.babooin.model.forms.UserRegistrationForm;
 
 @Entity
@@ -51,9 +47,6 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name="role_id") )
 	private List<Role> roles = new ArrayList<>();
 	
-	@Transient
-	Set<Integer> roleCodes = new HashSet<>();
-	
 	public User() {
 	}
 	
@@ -63,8 +56,6 @@ public class User {
 		firstName = form.getFirstName();
 		lastName = form.getLastName();
 		email = form.getEmail();
-		roleCodes.add(USER_ROLE.USER.getCode());
-		roleCodes.add(form.getSelectedRole());
 	}
 
 	public int getId() {
@@ -122,14 +113,7 @@ public class User {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
-	public Set<Integer> getRoleCodes() {
-		return roleCodes;
-	}
 
-	public void setRoleCodes(Set<Integer> roleCodes) {
-		this.roleCodes = roleCodes;
-	}
 
 	@Override
 	public String toString() {

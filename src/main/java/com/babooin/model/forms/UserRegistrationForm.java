@@ -4,11 +4,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.babooin.entity.security.Role;
-import com.babooin.entity.security.Role.USER_ROLE;
 import com.babooin.validation.FieldMatch;
 
 @FieldMatch(field = "password", fieldMatch = "matchingPassword", message = "Password fields don't match")

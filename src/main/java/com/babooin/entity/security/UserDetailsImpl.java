@@ -11,16 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserDetailsImpl implements UserDetails {
 	
 	private User user;
-	
-	private String myTestString = "Hello, this is a test@!";
-	
-	public String getMyTestString() {
-		return myTestString;
-	}
-
-	public void setMyTestString(String myTestString) {
-		this.myTestString = myTestString;
-	}
 
 	public UserDetailsImpl() {
 	}

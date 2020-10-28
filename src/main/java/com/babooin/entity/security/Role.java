@@ -116,18 +116,18 @@ public class Role {
 				.map(e -> e.getUsername()).collect(Collectors.toSet());
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		
-		if (obj == null || obj.getClass() != this.getClass())
-			return false;
-		
-		Role comparing = (Role) obj;
-		
-		return Objects.equals(id, role);
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		
+//		if (obj == null || obj.getClass() != this.getClass())
+//			return false;
+//		
+//		Role comparing = (Role) obj;
+//		
+//		return Objects.equals(id, role);
+//	}
 	
 	public void print() {
 		System.out.println("ID: " + id + ", ROLE: " + role);

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+	<head th:replace="fragments :: head_fragment">
+	</head>
+	<head>
+		<title>List of customers</title>
+	</head>
+	
+	<body>
+		<div class="container pt-3">
+
+			<h3>Customers</h3>
+			<hr>
+			<a href="#" th:href="@{/customers/addCustomer}" class="btn btn-primary mb-3">Add Customer</a>
+			<form action="#" th:action="@{/customers/search}" class="form-inline mb-1">
+				<input type="text" placeholder="Search by name" name="searching" class="form-control col-3 mr-1">
+				<button type="submit" class="btn btn-primary" >Search</button>
+			</form>
+			<table class="table table-striped table-bordered table-hover">
+				
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')" >Action</th>
+					</tr>
+				</thead>
+						
+				<tbody>
+					<tr th:each="customer : ${customers}" th:object="${customer}">
+						<th th:text="*{id}" >Cust ID</th>
+						<td th:text="*{firstName}">Cust FName</td>
+						<td th:text="*{lastName}">Cust LName</td>
+						<td th:text="*{email}">Cust Email</td>
+						<td sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')">
+							<a href="#" th:href="@{/customers/updateCustomer(customerId=*{id})}" class="btn btn-info btn-sm">Update</a>
+							<a sec:authorize="hasRole('ROLE_ADMIN')" href="#" th:href="@{/customers/deleteCustomer(customerId=*{id})}" 
+								class="btn btn-danger btn-sm"
+									th:onclick="if (!(confirm('Delete this customer?'))) return false">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div th:replace="fragments :: user_logout_btns"></div>
+			
+		</div>
+	</body>
+</html>
